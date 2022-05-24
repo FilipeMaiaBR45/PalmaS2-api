@@ -13,8 +13,8 @@ CREATE TABLE "Palmal" (
     "variedade" TEXT NOT NULL,
     "area" INTEGER NOT NULL,
     "tradicional" BOOLEAN NOT NULL,
-    "dataCadastro" DATE NOT NULL,
-    "lastUpdate" DATE NOT NULL,
+    "dataCadastro" TEXT NOT NULL,
+    "lastUpdate" TEXT NOT NULL,
     "userId" BIGINT NOT NULL,
 
     CONSTRAINT "Palmal_pkey" PRIMARY KEY ("id")
@@ -25,10 +25,10 @@ CREATE TABLE "Reboleira" (
     "id" BIGSERIAL NOT NULL,
     "iteracao" CHAR NOT NULL,
     "dataCadastro" DATE NOT NULL,
-    "proximaAvaliacao" DATE,
-    "deleted" DATE,
+    "proximaAvaliacao" TEXT,
+    "deleted" TEXT,
     "avaliado" BOOLEAN NOT NULL,
-    "lastUpdate" DATE NOT NULL,
+    "lastUpdate" TEXT NOT NULL,
     "palmalId" BIGINT NOT NULL,
 
     CONSTRAINT "Reboleira_pkey" PRIMARY KEY ("id")
@@ -38,11 +38,11 @@ CREATE TABLE "Reboleira" (
 CREATE TABLE "Estacao" (
     "id" BIGSERIAL NOT NULL,
     "status" TEXT NOT NULL,
-    "dataCadastro" DATE NOT NULL,
-    "proximaAvaliacao" DATE NOT NULL,
-    "deleted" DATE,
+    "dataCadastro" TEXT NOT NULL,
+    "proximaAvaliacao" TEXT NOT NULL,
+    "deleted" TEXT,
     "isObservationOpen" BOOLEAN NOT NULL,
-    "lastUpdate" DATE NOT NULL,
+    "lastUpdate" TEXT NOT NULL,
     "reboleiraId" BIGINT NOT NULL,
 
     CONSTRAINT "Estacao_pkey" PRIMARY KEY ("id")
@@ -52,13 +52,13 @@ CREATE TABLE "Estacao" (
 CREATE TABLE "Raquete" (
     "id" BIGSERIAL NOT NULL,
     "posicao" TEXT NOT NULL,
-    "dataDacastro" DATE NOT NULL,
+    "dataDacastro" TEXT NOT NULL,
     "aparencia" TEXT NOT NULL,
     "agenteControleBiologico" BOOLEAN NOT NULL,
     "agenteControleQuimico" BOOLEAN NOT NULL,
     "avaliado" BOOLEAN NOT NULL,
-    "corte" DATE,
-    "dataObservacao" DATE,
+    "corte" TEXT,
+    "dataObservacao" TEXT,
     "exported" BOOLEAN NOT NULL,
     "nextVersion" BIGINT NOT NULL,
     "estacaoId" BIGINT NOT NULL,

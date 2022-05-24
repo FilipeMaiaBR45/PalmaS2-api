@@ -19,12 +19,12 @@ model User {
 }
 
 model Palmal {
-  id           BigInt   @id @default(autoincrement())
+  id           BigInt  @id @default(autoincrement())
   variedade    String
   area         Int
   tradicional  Boolean
-  dataCadastro DateTime @db.Date
-  lastUpdate   DateTime @db.Date
+  dataCadastro String
+  lastUpdate   String
 
   User   User   @relation(fields: [userId], references: [id])
   userId BigInt
@@ -34,13 +34,13 @@ model Palmal {
 }
 
 model Reboleira {
-  id               BigInt    @id @default(autoincrement())
-  iteracao         String    @db.Char
-  dataCadastro     DateTime  @db.Date
-  proximaAvaliacao DateTime? @db.Date
-  deleted          DateTime? @db.Date
+  id               BigInt   @id @default(autoincrement())
+  iteracao         String   @db.Char
+  dataCadastro     DateTime @db.Date
+  proximaAvaliacao String?
+  deleted          String?
   avaliado         Boolean
-  lastUpdate       DateTime  @db.Date
+  lastUpdate       String
 
   Palmal   Palmal @relation(fields: [palmalId], references: [id])
   palmalId BigInt
@@ -50,13 +50,13 @@ model Reboleira {
 }
 
 model Estacao {
-  id                BigInt    @id @default(autoincrement())
+  id                BigInt  @id @default(autoincrement())
   status            String
-  dataCadastro      DateTime  @db.Date
-  proximaAvaliacao  DateTime  @db.Date
-  deleted           DateTime? @db.Date
+  dataCadastro      String
+  proximaAvaliacao  String
+  deleted           String?
   isObservationOpen Boolean
-  lastUpdate        DateTime  @db.Date
+  lastUpdate        String
 
 
   Reboleira   Reboleira @relation(fields: [reboleiraId], references: [id])
@@ -66,15 +66,15 @@ model Estacao {
 }
 
 model Raquete {
-  id                      BigInt    @id @default(autoincrement())
+  id                      BigInt  @id @default(autoincrement())
   posicao                 String
-  dataDacastro            DateTime  @db.Date
+  dataDacastro            String
   aparencia               String
   agenteControleBiologico Boolean
   agenteControleQuimico   Boolean
   avaliado                Boolean
-  corte                   DateTime? @db.Date
-  dataObservacao          DateTime? @db.Date
+  corte                   String?
+  dataObservacao          String?
   exported                Boolean
   nextVersion             BigInt
 

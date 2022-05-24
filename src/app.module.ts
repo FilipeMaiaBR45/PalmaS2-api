@@ -8,7 +8,13 @@ import { EstacaoModule } from './estacao/estacao.module';
 import { RaqueteModule } from './raquete/raquete.module';
 
 @Module({
-  imports: [UserModule, PalmalModule, ReboleiraModule, EstacaoModule, RaqueteModule],
+  imports: [
+    UserModule,
+    PalmalModule,
+    ReboleiraModule,
+    EstacaoModule,
+    RaqueteModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
