@@ -6,6 +6,7 @@ import { PalmalModule } from './palmal/palmal.module';
 import { ReboleiraModule } from './reboleira/reboleira.module';
 import { EstacaoModule } from './estacao/estacao.module';
 import { RaqueteModule } from './raquete/raquete.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { RaqueteModule } from './raquete/raquete.module';
     ReboleiraModule,
     EstacaoModule,
     RaqueteModule,
+    PrismaModule,
   ],
   controllers: [AppController],
   providers: [AppService],
