@@ -1,4 +1,4 @@
 export interface UserToken {
-  id: number;
+  id: bigint;
   access_token: string;
 }

@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client';
 export class User implements Prisma.UserUncheckedCreateInput {
-  id?: number | bigint;
+  id?: bigint;
   email: string;
   password: string;
   palmais?: Prisma.PalmalUncheckedCreateNestedManyWithoutUserInput;
