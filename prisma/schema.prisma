@@ -83,7 +83,7 @@ model Raquete {
   corte                   String?
   dataObservacao          String?
   exported                Boolean
-  nextVersion             BigInt
+  nextVersion             Int
   Estacao                 Estacao? @relation(fields: [estacaoId], references: [id])
   estacaoId               Int?
 }
