@@ -35,9 +35,9 @@ model Palmal {
 }
 
 model Reboleira {
-  id               Int      @id @default(autoincrement())
-  iteracao         String   @db.Char
-  dataCadastro     DateTime @db.Date
+  id               Int     @id @default(autoincrement())
+  iteracao         String  @db.Char
+  dataCadastro     String
   proximaAvaliacao String?
   deleted          String?
   avaliado         Boolean

@@ -24,7 +24,7 @@ CREATE TABLE "Palmal" (
 CREATE TABLE "Reboleira" (
     "id" SERIAL NOT NULL,
     "iteracao" CHAR NOT NULL,
-    "dataCadastro" DATE NOT NULL,
+    "dataCadastro" TEXT NOT NULL,
     "proximaAvaliacao" TEXT,
     "deleted" TEXT,
     "avaliado" BOOLEAN NOT NULL,
