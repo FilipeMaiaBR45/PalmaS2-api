@@ -60,7 +60,7 @@ CREATE TABLE "Raquete" (
     "corte" TEXT,
     "dataObservacao" TEXT,
     "exported" BOOLEAN NOT NULL,
-    "nextVersion" BIGINT NOT NULL,
+    "nextVersion" INTEGER NOT NULL,
     "estacaoId" INTEGER,
 
     CONSTRAINT "Raquete_pkey" PRIMARY KEY ("id")
