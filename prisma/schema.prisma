@@ -12,29 +12,30 @@ datasource db {
 }
 
 model User {
-  id       BigInt   @id @default(autoincrement())
+  id       Int      @id @default(autoincrement())
   email    String   @unique
   password String
   palmais  Palmal[]
 }
 
 model Palmal {
-  id           BigInt  @id @default(autoincrement())
+  id           Int     @id @default(autoincrement())
   variedade    String
   area         Int
   tradicional  Boolean
   dataCadastro String
   lastUpdate   String
 
-  User   User   @relation(fields: [userId], references: [id])
-  userId BigInt
+
 
   reboleiras Reboleira[]
 
+  User   User? @relation(fields: [userId], references: [id])
+  userId Int?
 }
 
 model Reboleira {
-  id               BigInt   @id @default(autoincrement())
+  id               Int      @id @default(autoincrement())
   iteracao         String   @db.Char
   dataCadastro     DateTime @db.Date
   proximaAvaliacao String?
@@ -42,15 +43,16 @@ model Reboleira {
   avaliado         Boolean
   lastUpdate       String
 
-  Palmal   Palmal @relation(fields: [palmalId], references: [id])
-  palmalId BigInt
+
 
   estacaoes Estacao[]
 
+  Palmal   Palmal? @relation(fields: [palmalId], references: [id])
+  palmalId Int?
 }
 
 model Estacao {
-  id                BigInt  @id @default(autoincrement())
+  id                Int     @id @default(autoincrement())
   status            String
   dataCadastro      String
   proximaAvaliacao  String
@@ -59,14 +61,19 @@ model Estacao {
   lastUpdate        String
 
 
-  Reboleira   Reboleira @relation(fields: [reboleiraId], references: [id])
-  reboleiraId BigInt
 
-  raquetes Raquete[]
+
+
+
+  Reboleira   Reboleira? @relation(fields: [reboleiraId], references: [id])
+  reboleiraId Int?
+  Raquetes    Raquete[]
+
+
 }
 
 model Raquete {
-  id                      BigInt  @id @default(autoincrement())
+  id                      Int      @id @default(autoincrement())
   posicao                 String
   dataDacastro            String
   aparencia               String
@@ -77,7 +84,6 @@ model Raquete {
   dataObservacao          String?
   exported                Boolean
   nextVersion             BigInt
-
-  Estacao   Estacao @relation(fields: [estacaoId], references: [id])
-  estacaoId BigInt
+  Estacao                 Estacao? @relation(fields: [estacaoId], references: [id])
+  estacaoId               Int?
 }
