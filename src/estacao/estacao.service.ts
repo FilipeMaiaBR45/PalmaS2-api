@@ -16,8 +16,8 @@ export class EstacaoService {
     return this.prisma.estacao.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} estacao`;
+  async findOne(id: number) {
+    return this.prisma.estacao.findUnique({ where: { id } });
   }
 
   update(id: number, updateEstacaoDto: UpdateEstacaoDto) {
