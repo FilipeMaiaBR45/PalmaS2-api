@@ -12,8 +12,8 @@ export class EstacaoService {
     return createdEstacao;
   }
 
-  findAll() {
-    return `This action returns all estacao`;
+  async findAll() {
+    return this.prisma.estacao.findMany();
   }
 
   findOne(id: number) {
