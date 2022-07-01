@@ -1,26 +1,34 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateReboleiraDto } from './dto/create-reboleira.dto';
 import { UpdateReboleiraDto } from './dto/update-reboleira.dto';
 
 @Injectable()
 export class ReboleiraService {
-  create(createReboleiraDto: CreateReboleiraDto) {
-    return 'This action adds a new reboleira';
+  constructor(private readonly prisma: PrismaService) {}
+  async create(data: CreateReboleiraDto) {
+    const createdReboleira = await this.prisma.reboleira.create({ data });
+
+    return createdReboleira;
   }
 
-  findAll() {
-    return `This action returns all reboleira`;
+  async findAll() {
+    return this.prisma.reboleira.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} reboleira`;
+  async findOne(id: number) {
+    return this.prisma.reboleira.findUnique({ where: { id } });
   }
 
-  update(id: number, updateReboleiraDto: UpdateReboleiraDto) {
-    return `This action updates a #${id} reboleira`;
+  async update(id: number, data: UpdateReboleiraDto) {
+    const updatedReboleira = this.prisma.reboleira.update({
+      where: { id },
+      data,
+    });
+    return updatedReboleira;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} reboleira`;
+  async remove(id: number) {
+    return this.prisma.reboleira.delete({ where: { id } });
   }
 }
