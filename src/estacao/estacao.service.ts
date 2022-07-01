@@ -20,8 +20,12 @@ export class EstacaoService {
     return this.prisma.estacao.findUnique({ where: { id } });
   }
 
-  update(id: number, updateEstacaoDto: UpdateEstacaoDto) {
-    return `This action updates a #${id} estacao`;
+  async update(id: number, data: UpdateEstacaoDto) {
+    const updatedEstacao = await this.prisma.estacao.update({
+      where: { id },
+      data,
+    });
+    return updatedEstacao;
   }
 
   remove(id: number) {
