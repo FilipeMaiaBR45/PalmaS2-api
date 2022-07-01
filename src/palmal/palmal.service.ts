@@ -15,19 +15,23 @@ export class PalmalService {
     return createdPalmal;
   }
 
-  findAll() {
-    return `This action returns all palmal`;
+  async findAll() {
+    return this.prisma.palmal.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} palmal`;
+  async findOne(id: number) {
+    return this.prisma.palmal.findUnique({ where: { id } });
   }
 
-  update(id: number, updatePalmalDto: UpdatePalmalDto) {
-    return `This action updates a #${id} palmal`;
+  async update(id: number, data: UpdatePalmalDto) {
+    const updatedPalmal = await this.prisma.palmal.update({
+      where: { id },
+      data,
+    });
+    return updatedPalmal;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} palmal`;
+  async remove(id: number) {
+    return this.prisma.palmal.delete({ where: { id } });
   }
 }
