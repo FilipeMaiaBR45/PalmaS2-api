@@ -28,7 +28,7 @@ export class EstacaoService {
     return updatedEstacao;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} estacao`;
+  async remove(id: number) {
+    return this.prisma.estacao.delete({ where: { id } });
   }
 }
