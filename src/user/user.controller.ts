@@ -12,4 +12,9 @@ export class UserController {
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
+  @IsPublic()
+  @Get('email/:email')
+  findOne(@Param('email') email: string) {
+    return this.userService.findByEmailUser(email);
+  }
 }

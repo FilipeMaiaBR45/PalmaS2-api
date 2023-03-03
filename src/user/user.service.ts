@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
+import e from 'express';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
@@ -15,7 +16,25 @@ export class UserService {
       password: await bcrypt.hash(createUserDto.password, 10),
     };
 
-    const createdUser = await this.prisma.user.create({ data });
+    let createdUser: CreateUserDto = {
+      email: '',
+      password: '',
+    };
+
+    try {
+      createdUser = await this.prisma.user.create({ data });
+    } catch (e) {
+      if (e instanceof Prisma.PrismaClientKnownRequestError) {
+        // The .code property can be accessed in a type-safe manner
+        if (e.code === 'P2002') {
+          console.log(e);
+        }
+      }
+      throw new HttpException(
+        'There is a unique constraint violation, a new user cannot be created with this email',
+        400,
+      );
+    }
 
     return {
       ...createdUser,
@@ -25,5 +44,26 @@ export class UserService {
 
   findByEmail(email: string) {
     return this.prisma.user.findUnique({ where: { email } });
+  }
+  findByEmailUser(email: string) {
+    try {
+      return this.prisma.user.findUnique({
+        where: { email },
+        select: {
+          email: true,
+        },
+      });
+    } catch (error) {
+      if (e instanceof Prisma.PrismaClientKnownRequestError) {
+        // The .code property can be accessed in a type-safe manner
+        if (e.code === 'P2002') {
+          console.log(e);
+        }
+      }
+      throw new HttpException(
+        'There is a unique constraint violation, a new user cannot be created with this email',
+        400,
+      );
+    }
   }
 }
