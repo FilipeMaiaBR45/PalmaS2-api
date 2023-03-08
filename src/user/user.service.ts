@@ -45,25 +45,20 @@ export class UserService {
   findByEmail(email: string) {
     return this.prisma.user.findUnique({ where: { email } });
   }
-  findByEmailUser(email: string) {
-    try {
-      return this.prisma.user.findUnique({
-        where: { email },
-        select: {
-          email: true,
-        },
-      });
-    } catch (error) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError) {
-        // The .code property can be accessed in a type-safe manner
-        if (e.code === 'P2002') {
-          console.log(e);
-        }
-      }
-      throw new HttpException(
-        'There is a unique constraint violation, a new user cannot be created with this email',
-        400,
-      );
+  async findByEmailUser(email: string) {
+    const data = await this.prisma.user.findUnique({
+      where: { email },
+      select: {
+        email: true,
+      },
+    });
+
+    if (data == null) {
+      throw new HttpException('sem user', 400);
+    } else {
+      return data;
     }
+
+    console.log(data);
   }
 }
