@@ -2,7 +2,7 @@ import { Prisma } from '@prisma/client';
 export class Reboleira implements Prisma.ReboleiraUncheckedCreateInput {
   id?: number;
   iteracao: string;
-  dataCadastro: string | Date;
+  dataCadastro: string;
   proximaAvaliacao?: string;
   deleted?: string;
   avaliado: boolean;

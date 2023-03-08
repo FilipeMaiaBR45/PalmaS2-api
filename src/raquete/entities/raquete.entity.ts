@@ -10,6 +10,6 @@ export class Raquete implements Prisma.RaqueteUncheckedCreateInput {
   corte?: string;
   dataObservacao?: string;
   exported: boolean;
-  nextVersion: number | bigint;
+  nextVersion: number;
   estacaoId?: number;
 }

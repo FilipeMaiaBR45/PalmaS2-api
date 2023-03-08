@@ -1,26 +1,37 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePalmalDto } from './dto/create-palmal.dto';
 import { UpdatePalmalDto } from './dto/update-palmal.dto';
+import { Prisma } from '@prisma/client';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { Palmal } from './entities/palmal.entity';
 
 @Injectable()
 export class PalmalService {
-  create(createPalmalDto: CreatePalmalDto) {
-    return 'This action adds a new palmal';
+  constructor(private readonly prisma: PrismaService) {}
+
+  async create(data: CreatePalmalDto): Promise<Palmal> {
+    const createdPalmal = await this.prisma.palmal.create({ data });
+
+    return createdPalmal;
   }
 
-  findAll() {
-    return `This action returns all palmal`;
+  async findAll() {
+    return this.prisma.palmal.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} palmal`;
+  async findOne(id: number) {
+    return this.prisma.palmal.findUnique({ where: { id } });
   }
 
-  update(id: number, updatePalmalDto: UpdatePalmalDto) {
-    return `This action updates a #${id} palmal`;
+  async update(id: number, data: UpdatePalmalDto) {
+    const updatedPalmal = await this.prisma.palmal.update({
+      where: { id },
+      data,
+    });
+    return updatedPalmal;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} palmal`;
+  async remove(id: number) {
+    return this.prisma.palmal.delete({ where: { id } });
   }
 }

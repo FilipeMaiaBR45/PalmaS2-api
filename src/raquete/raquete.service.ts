@@ -1,26 +1,34 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateRaqueteDto } from './dto/create-raquete.dto';
 import { UpdateRaqueteDto } from './dto/update-raquete.dto';
 
 @Injectable()
 export class RaqueteService {
-  create(createRaqueteDto: CreateRaqueteDto) {
-    return 'This action adds a new raquete';
+  constructor(private readonly prisma: PrismaService) {}
+
+  async create(data: CreateRaqueteDto) {
+    const createdRaquete = await this.prisma.raquete.create({ data });
+    return createdRaquete;
   }
 
-  findAll() {
-    return `This action returns all raquete`;
+  async findAll() {
+    return this.prisma.raquete.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} raquete`;
+  async findOne(id: number) {
+    return this.prisma.raquete.findUnique({ where: { id } });
   }
 
-  update(id: number, updateRaqueteDto: UpdateRaqueteDto) {
-    return `This action updates a #${id} raquete`;
+  async update(id: number, data: UpdateRaqueteDto) {
+    const updatedRaquete = await this.prisma.raquete.update({
+      where: { id },
+      data,
+    });
+    return updatedRaquete;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} raquete`;
+  async remove(id: number) {
+    return this.prisma.raquete.delete({ where: { id } });
   }
 }
